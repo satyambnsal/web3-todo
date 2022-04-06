@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn {
+  @apply text-base font-medium rounded-lg p-3;
+}
+
+.btn--primary {
+  @apply bg-sky-500 text-white;
+}
+
+.btn--secondary {
+  @apply bg-slate-100 text-slate-900;
+}
+
+.awesome-round-btn {
+  @apply px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2;
+}

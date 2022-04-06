@@ -1,0 +1,38 @@
+{
+  "name": "@dumb/scaffold-web3",
+  "version": "1.0.0",
+  "description": "lets keep it simple, stupid, dump. there is alredy tons of things going on in my life",
+  "author": "Satyam Bansal <https://satyambnsal.com>",
+  "license": "MIT",
+  "keywords": [
+    "ethereum",
+    "react",
+    "uniswap",
+    "workspaces",
+    "yarn"
+  ],
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/@graphprotocol/graph-ts",
+      "**/@graphprotocol/graph-ts/**",
+      "**/hardhat",
+      "**/hardhat/**",
+      "**/solidity-coverage",
+      "**/solidity-coverage/**",
+      "**/@typechain",
+      "**/@typechain/**",
+      "**/hardhat-ts",
+      "**/hardhat-ts/**",
+      "**/metadata-api",
+      "**/metadata-api-ts/**"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "husky": "^7.0.2"
+  }
+}
