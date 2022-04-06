@@ -10,6 +10,7 @@ import { SignMessage } from '../components/SignMessage';
 
 const Home: NextPage = () => {
   const [{ data: accountData }] = useAccount();
+  const isAddress = !!accountData?.address || false;
   return (
     <div className="">
       <Head>
@@ -17,20 +18,22 @@ const Home: NextPage = () => {
         <meta name="description" content="Web3 Todo Application" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex justify-center mt-10">
+      <main className="hero min-h-screen bg-base-200">
         <header>
-          <button className="btn">Button</button>
+          <div className="absolute top-5 right-5">
+            {!!isAddress ? (
+              <button className="btn" disabled={true} onClick={() => {}}>
+                {accountData?.address}
+              </button>
+            ) : (
+              <Connect></Connect>
+            )}
+          </div>
         </header>
-        {accountData?.address ? (
-          <>
-            <Account></Account>
-            <NetworkSwitcher></NetworkSwitcher>
-            <Todos></Todos>
-            <SignMessage></SignMessage>
-          </>
-        ) : (
-          <Connect />
-        )}
+        {/* <Account></Account>
+            <NetworkSwitcher></NetworkSwitcher> */}
+        <Todos></Todos>
+        {/* <SignMessage></SignMessage> */})
       </main>
     </div>
   );
