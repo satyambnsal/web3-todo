@@ -1,10 +1,10 @@
-import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { providers } from 'ethers';
 import { Provider, chain, Connector } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { WalletLinkConnector } from 'wagmi/connectors/walletLink';
+import '../styles/globals.css';
 
 import { chains } from '../constants';
 
@@ -34,7 +34,7 @@ const connectors = ({ chainId }: ConnectorsConfig) => {
     }),
     new WalletLinkConnector({
       options: {
-        appName: 'Dumb Web3 app',
+        appName: 'Web3 Todo',
         jsonRpcUrl: `${rpcUrl}/${infuraId}`,
       },
     }),
@@ -46,30 +46,23 @@ type ProviderConfig = { chainId?: number; connector?: Connector };
 const isChainSupported = (chainId?: number) =>
   chains.some((x) => x.id === chainId);
 
-const customProviders = [
-  {
-    chainId: 1337,
-    provider: new providers.JsonRpcProvider('http://localhost:8545'),
-  },
-];
+const provider = ({ chainId }: ProviderConfig) => {
+  console.log('Chain Id:: ', chainId);
+  if (chainId === 1337) {
+    return new providers.JsonRpcProvider('http://localhost:8545');
+  }
 
-const localProvider = new providers.JsonRpcProvider('http://localhost:8545');
-const provider = ({ chainId }: ProviderConfig) =>
-  providers.getDefaultProvider(
+  return providers.getDefaultProvider(
     isChainSupported(chainId) ? chainId : defaultChain.id,
     {
       infura: infuraId,
     }
   );
-// console.log('provider:: ', provider);
+};
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Provider
-      autoConnect
-      connectors={connectors}
-      provider={() => localProvider}
-    >
+    <Provider autoConnect connectors={connectors} provider={provider}>
       <Component {...pageProps} />
     </Provider>
   );

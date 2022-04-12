@@ -1,5 +1,5 @@
 {
-  "name": "@dumb/scaffold-web3",
+  "name": "@dumb/web3-todo",
   "version": "1.0.0",
   "description": "lets keep it simple, stupid, dump. there is alredy tons of things going on in my life",
   "author": "Satyam Bansal <https://satyambnsal.com>",
@@ -7,11 +7,14 @@
   "keywords": [
     "ethereum",
     "react",
-    "uniswap",
-    "workspaces",
-    "yarn"
+    "web3",
+    "todoapp"
   ],
   "private": true,
+  "scripts": {
+    "frontend:dev": "yarn workspace @dumb/frontend dev",
+    "frontend:build": "yarn workspace #dumb/frontend build"
+  },
   "workspaces": {
     "packages": [
       "packages/*"

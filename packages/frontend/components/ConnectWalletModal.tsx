@@ -1,14 +1,22 @@
 import * as React from 'react';
 import { useConnect } from 'wagmi';
-
 import { useIsMounted } from '../hooks/useIsMounted';
+import { Modal } from './Modal';
 
 {
   /* <div>{error && <div>{error?.message ?? 'Failed to connect'}</div>}</div> */
 }
-export const Connect = () => {
-  const isMounted = useIsMounted();
 
+type ConnectWalletModalProps = {
+  isOpen: boolean;
+  handleClose: () => void;
+};
+
+export const ConnectWalletModal = ({
+  isOpen,
+  handleClose,
+}: ConnectWalletModalProps) => {
+  const isMounted = useIsMounted();
   const [
     {
       data: { connector, connectors },
@@ -19,14 +27,8 @@ export const Connect = () => {
   ] = useConnect();
 
   return (
-    <div className="dropdown">
-      <label tabIndex={0} className="btn m-1">
-        Connect Wallet
-      </label>
-      <ul
-        tabIndex={0}
-        className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
-      >
+    <Modal isOpen={isOpen} handleClose={handleClose}>
+      <ul className="p-2 shadow bg-base-100 rounded-box w-52">
         {connectors.map((x, i) => (
           <li key={i}>
             <button
@@ -43,6 +45,6 @@ export const Connect = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </Modal>
   );
 };

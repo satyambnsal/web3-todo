@@ -12,6 +12,7 @@
   "dependencies": {
     "@ethersproject/contracts": "^5.5.0",
     "@ethersproject/providers": "^5.5.3",
+    "classnames": "^2.3.1",
     "daisyui": "^2.13.6",
     "ethers": "^5.5.1",
     "next": "12.1.0",
