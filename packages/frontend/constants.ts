@@ -18,4 +18,6 @@ export const CUSTOM_CHAINS: Chain[] = [
   },
 ];
 
+export const RINKEBY_BLOCK_EXPLORER = 'https://rinkeby.etherscan.io';
+
 export const chains = defaultChains.concat(...CUSTOM_CHAINS);

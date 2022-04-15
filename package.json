@@ -13,7 +13,14 @@
   "private": true,
   "scripts": {
     "frontend:dev": "yarn workspace @dumb/frontend dev",
-    "frontend:build": "yarn workspace #dumb/frontend build"
+    "frontend:build": "yarn workspace @dumb/frontend build",
+    "hardhat:deploy": "yarn workspace @dumb/hardhat deploy",
+    "hardhat:deploy:local": "yarn workspace @dumb/hardhat deploy:local",
+    "hardhat:deploy:rinkeby": "yarn workspace @dumb/hardhat deploy:rinkeby",
+    "hardhat:deploy:mumbai": "yarn workspace @dumb/hardhat deploy:polygon_mumbai",
+    "subgraph:codegen": "yarn workspace @dumb/subgraph codegen",
+    "subgraph:build": "yarn workspace @dumb/subgraph build",
+    "subgraph:deploy-studio": "yarn workspace @dumb/subgraph deploy-studio"
   },
   "workspaces": {
     "packages": [
@@ -22,8 +29,6 @@
     "nohoist": [
       "**/@graphprotocol/graph-ts",
       "**/@graphprotocol/graph-ts/**",
-      "**/hardhat",
-      "**/hardhat/**",
       "**/solidity-coverage",
       "**/solidity-coverage/**",
       "**/@typechain",

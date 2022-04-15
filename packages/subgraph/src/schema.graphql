@@ -1,0 +1,7 @@
+type Todo @entity {
+  id: ID!
+  todoId: ID!
+  title: String!
+  completed: Boolean!
+  createdAt: BigInt!
+}

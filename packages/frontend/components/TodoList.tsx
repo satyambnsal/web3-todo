@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import { Todo } from './Todos';
+import { RINKEBY_BLOCK_EXPLORER } from '../constants';
 
 type TodoListProps = {
   todos: Todo[];
@@ -13,13 +14,21 @@ export const TodoList: FC<TodoListProps> = ({ todos, handleToggle }) => {
         All Todos
       </h1>
       <ul className="mt-5 w-3/4 mx-auto bg-white shadow-md rounded-sm p-5">
-        {todos.map(({ id, title, completed }) => (
+        {todos.map(({ id, title, completed, transactionHash }) => (
           <li
             className="flex px-4 py-2 mb-3 text-lg font-semibold border-2 justify-between items-center"
             key={id}
           >
             <p>{title}</p>
             <div className="flex items-center">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                className="link text-xs"
+                href={`${RINKEBY_BLOCK_EXPLORER}/tx/${transactionHash}`}
+              >
+                Transaction Details
+              </a>
               <p className="uppercase mx-3">
                 {!!completed ? 'done' : 'pending'}
               </p>

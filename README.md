@@ -2,6 +2,7 @@
 
 
 
-# Tasks
-- [ ] Fix provider issue. We should be able to use provider with respect to the connected network.
-- 
+**Deployed Subgraph URL**
+
+Queries (HTTP):     https://api.studio.thegraph.com/query/25568/dumbtodo/v0.0.2
+Subscriptions (WS): https://api.studio.thegraph.com/query/25568/dumbtodo/v0.0.2
