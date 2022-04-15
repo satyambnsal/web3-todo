@@ -13,7 +13,7 @@ export const TodoList: FC<TodoListProps> = ({ todos, handleToggle }) => {
       <ul className="mt-5 w-3/4 mx-auto bg-white shadow-md rounded-sm p-5">
         {todos.map(({ id, title, completed, transactionHash }) => (
           <li
-            className="flex px-4 py-2 my-4 border text-lg font-semibold justify-between items-center shadow-sm hover:shadow-md"
+            className="flex flex-1 px-4 py-2 my-4 border text-lg font-semibold justify-between items-center shadow-sm hover:shadow-md"
             key={id}
           >
             <p>{title}</p>
@@ -21,16 +21,16 @@ export const TodoList: FC<TodoListProps> = ({ todos, handleToggle }) => {
               <a
                 target="_blank"
                 rel="noreferrer"
-                className="link text-xs"
+                className="link text-xs mr-4 "
                 href={`${RINKEBY_BLOCK_EXPLORER}/tx/${transactionHash}`}
               >
                 Transaction Details
               </a>
-              <p className="uppercase mx-3">
+              <div className="py-3 badge badge-outline w-24 uppercase mx-4">
                 {!!completed ? 'done' : 'pending'}
-              </p>
+              </div>
               <button
-                className="uppercase bg-blue-600 text-white px-6 py-2 rounded-md "
+                className="w-48 uppercase bg-blue-600 text-white px-6 py-2 rounded-md "
                 onClick={() => handleToggle(id)}
               >
                 Mark {!!completed ? 'pending' : 'done'}
