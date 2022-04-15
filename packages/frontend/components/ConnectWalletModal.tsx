@@ -28,12 +28,12 @@ export const ConnectWalletModal = ({
 
   return (
     <Modal isOpen={isOpen} handleClose={handleClose}>
-      <ul className="p-2 shadow bg-base-100 rounded-box w-52">
+      <ul className="mt-6 p-8 ">
         {connectors.map((x, i) => (
-          <li key={i}>
+          <li key={i} className="block my-2 mx-auto">
             <button
               type="button"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="w-full mx-auto btn font-bold py-2 px-4 rounded"
               disabled={isMounted && !x.ready}
               key={x.name}
               onClick={() => connect(x)}

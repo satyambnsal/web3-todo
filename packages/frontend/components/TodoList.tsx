@@ -10,13 +10,10 @@ type TodoListProps = {
 export const TodoList: FC<TodoListProps> = ({ todos, handleToggle }) => {
   return (
     <div className="mb-10 w-full">
-      <h1 className="w-full text-gray-800 text-center text-2xl uppercase underline underline-offset-2 font-bold decoration-gray-900">
-        All Todos
-      </h1>
       <ul className="mt-5 w-3/4 mx-auto bg-white shadow-md rounded-sm p-5">
         {todos.map(({ id, title, completed, transactionHash }) => (
           <li
-            className="flex px-4 py-2 mb-3 text-lg font-semibold border-2 justify-between items-center"
+            className="flex px-4 py-2 my-4 border text-lg font-semibold justify-between items-center shadow-sm hover:shadow-md"
             key={id}
           >
             <p>{title}</p>

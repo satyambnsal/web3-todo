@@ -3,7 +3,9 @@ import { useState } from 'react';
 import Head from 'next/head';
 import { useAccount } from 'wagmi';
 import { ConnectWalletModal } from '../components/ConnectWalletModal';
-import { Todos } from '../components/Todos';
+// import { Todos } from '../components/Todos';
+import { SubgraphTodos } from '../components/SubgraphTodos';
+import { Toaster } from 'react-hot-toast';
 
 const Home: NextPage = () => {
   const [{ data: accountData }] = useAccount();
@@ -21,7 +23,7 @@ const Home: NextPage = () => {
         <meta name="description" content="Web3 Todo Application" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="hero min-h-screen bg-base-200 w-full">
+      <main className="hero min-h-screen w-full">
         <header>
           <div className="absolute top-5 right-5">
             {!!isAddress ? (
@@ -33,11 +35,14 @@ const Home: NextPage = () => {
             )}
           </div>
         </header>
-        <Todos handleOpenWalletModal={handleOpenWalletModal}></Todos>
+        <SubgraphTodos
+          handleOpenWalletModal={handleOpenWalletModal}
+        ></SubgraphTodos>
         <ConnectWalletModal
           isOpen={showConnectWallet}
           handleClose={handleClose}
         ></ConnectWalletModal>
+        <Toaster />
       </main>
     </div>
   );

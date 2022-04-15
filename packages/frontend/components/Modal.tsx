@@ -12,14 +12,12 @@ export const Modal = (props: Props) => {
     <div>
       <div className={classNames('modal', { 'modal-open': props.isOpen })}>
         <div className="modal-box relative">
-          <label
-            htmlFor="my-modal-3"
-            className="btn btn-sm btn-circle absolute right-2 top-2"
+          <button
+            className="h-2 absolute right-4 top-4"
             onClick={props.handleClose}
-            role="presentation"
           >
-            ✕
-          </label>
+            <span className="leading-4 block h-8">X</span>
+          </button>
           {props.children}
         </div>
       </div>

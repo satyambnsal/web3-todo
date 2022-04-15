@@ -21,3 +21,7 @@ export const CUSTOM_CHAINS: Chain[] = [
 export const RINKEBY_BLOCK_EXPLORER = 'https://rinkeby.etherscan.io';
 
 export const chains = defaultChains.concat(...CUSTOM_CHAINS);
+
+export const SUBGRAPH_ENDPOINT_URL =
+  process.env.NEXT_PUBLIC_SUBGRAPH_ENDPOINT_URL ||
+  'https://api.studio.thegraph.com/query/25568/dumbtodo/v0.0.2';

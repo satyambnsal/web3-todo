@@ -1,12 +1,10 @@
 import React, { useState, FC } from 'react';
-import { abi as TodosHardhatAbi } from '../contracts/hardhat/v1/Todos.abi';
-import { address as TodosHardhatAddress } from '../contracts/hardhat/v1/Todos.address';
 import { abi as TodosRinkebyAbi } from '../contracts/rinkeby/v1/Todos.abi';
 import { address as TodosRinkebyAddress } from '../contracts/rinkeby/v1/Todos.address';
-import { useContract, useSigner, useContractEvent } from 'wagmi';
-import { TodoList } from './TodoList';
+import { useContract, useSigner } from 'wagmi';
 import { useLocalStorage } from '../hooks/useLocalstorage';
-import toast from 'react-hot-toast';
+import { SubGraphTodoList } from './SubGraphTodoList';
+
 type TodoProps = {
   handleOpenWalletModal: () => void;
 };
@@ -15,13 +13,9 @@ export type Todo = {
   id: number;
   title: string;
   completed: boolean;
-  transactionHash: string;
 };
 
-const TODO_CREATED_EVENT = 'TodoCreated';
-const TODO_UPDATED_EVENT = 'TodoUpdated';
-
-export const Todos: FC<TodoProps> = ({ handleOpenWalletModal }) => {
+export const SubgraphTodos: FC<TodoProps> = ({ handleOpenWalletModal }) => {
   const [{ data: signer, error, loading }, getSigner] = useSigner();
   const [todos, setTodos] = useLocalStorage<Todo[]>('todos', []);
 
@@ -34,61 +28,6 @@ export const Todos: FC<TodoProps> = ({ handleOpenWalletModal }) => {
   const [title, setTitle] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  useContractEvent(
-    {
-      addressOrName: TodosRinkebyAddress,
-      contractInterface: TodosRinkebyAbi,
-    },
-    TODO_CREATED_EVENT,
-    (event) => {
-      console.log('event: ', event);
-      const [id, title, completed, txDetails] = event;
-      const { transactionHash } = txDetails;
-      const numberId = id.toString();
-      const newTodo = {
-        id: numberId,
-        title,
-        completed,
-        transactionHash,
-      };
-      // here we check if todo already exist in the list
-      const isExist = todos.find((todo) => todo.id === numberId);
-      if (!isExist) {
-        setTodos([...todos, newTodo]);
-      } else {
-        console.log('todo already exist');
-      }
-    }
-  );
-
-  useContractEvent(
-    {
-      addressOrName: TodosRinkebyAddress,
-      contractInterface: TodosRinkebyAbi,
-    },
-    TODO_UPDATED_EVENT,
-    (event) => {
-      console.log('updated event: ', event);
-      const [id, title, completed, txDetails] = event;
-      const { transactionHash } = txDetails;
-      const numberId = id.toString();
-      const updated = {
-        id: numberId,
-        title,
-        completed,
-        transactionHash,
-      };
-      // here we check if todo already exist in the list
-      const updatedTodos = todos.map((todo) => {
-        if (todo.id === numberId) {
-          return updated;
-        }
-        return todo;
-      });
-      setTodos(updatedTodos);
-    }
-  );
-
   const handleCreateTodo = async () => {
     if (!signer) {
       handleOpenWalletModal();
@@ -100,8 +39,6 @@ export const Todos: FC<TodoProps> = ({ handleOpenWalletModal }) => {
       const tx = TodoContract.create(title);
       // await tx.wait();
       console.log(tx);
-
-      toast('Todo created successfully');
     } catch (error) {
       console.log('Error occured::: ', error);
     }
@@ -148,8 +85,11 @@ export const Todos: FC<TodoProps> = ({ handleOpenWalletModal }) => {
           </div>
         </div>
       </div>
-      <div className="divider">All Todos</div>
-      <TodoList todos={todos} handleToggle={handleToggleTodo}></TodoList>
+      <div className="divider text-gray-800 text-center font-bold decoration-gray-900">
+        {' '}
+        All Todos
+      </div>
+      <SubGraphTodoList handleToggle={handleToggleTodo}></SubGraphTodoList>
     </div>
   );
 };
